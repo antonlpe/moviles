@@ -1,4 +1,4 @@
-package com.example.anton.gijonwifi;
+package com.example.anton.gijonwifi.JSON;
 
 import android.content.Context;
 import android.graphics.Bitmap;

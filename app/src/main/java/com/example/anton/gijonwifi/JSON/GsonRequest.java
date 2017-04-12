@@ -1,4 +1,4 @@
-package com.example.anton.gijonwifi;
+package com.example.anton.gijonwifi.JSON;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;

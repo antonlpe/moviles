@@ -1,4 +1,4 @@
-package com.example.anton.gijonwifi;
+package com.example.anton.gijonwifi.JSON;
 
 import com.google.gson.annotations.SerializedName;
 

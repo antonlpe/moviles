@@ -1,6 +1,4 @@
-package com.example.anton.gijonwifi;
-
-import com.google.gson.annotations.SerializedName;
+package com.example.anton.gijonwifi.JSON;
 
 import java.util.ArrayList;
 import java.util.List;
