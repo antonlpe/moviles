@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity  {
 
 
 
-    //Intent que llama a maps pasándole una localización
+    //metodo que crea un Intent que llama a maps pasándole una localización
     public void showMap(Uri geoLocation) {
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setData(geoLocation);
@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity  {
                 }
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(getBaseContext(), android.R.layout.simple_list_item_1, nombres);
                 lvlista.setAdapter(adapter);
-                
+
                 //pulsador
                 lvlista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
