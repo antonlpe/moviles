@@ -4,24 +4,22 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
-import com.android.volley.toolbox.Volley;
+
 import com.example.anton.gijonwifi.JSON.Datos;
 import com.example.anton.gijonwifi.JSON.GsonRequest;
 import com.example.anton.gijonwifi.JSON.VolleyManager;
 
-import java.util.ArrayList;
+
 
 
 public class MainActivity extends AppCompatActivity  {
@@ -47,6 +45,7 @@ public class MainActivity extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         tx = (TextView) findViewById(R.id.txprueba);
         btmapa = (Button) findViewById(R.id.btmapa);
         lvlista = (ListView) findViewById(R.id.lvlista);
