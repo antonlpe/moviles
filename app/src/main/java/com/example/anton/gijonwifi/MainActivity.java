@@ -18,8 +18,8 @@ import com.android.volley.Response;
 import com.example.anton.gijonwifi.JSON.Datos;
 import com.example.anton.gijonwifi.JSON.GsonRequest;
 import com.example.anton.gijonwifi.JSON.VolleyManager;
-
-
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.LatLng;
 
 
 public class MainActivity extends AppCompatActivity  {
@@ -30,9 +30,6 @@ public class MainActivity extends AppCompatActivity  {
     TextView tx = null;
     ListView lvlista = null;
 
-
-
-    //metodo que crea un Intent que llama a maps pasándole una localización
     public void showMap(Uri geoLocation) {
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setData(geoLocation);
@@ -40,6 +37,7 @@ public class MainActivity extends AppCompatActivity  {
             startActivity(intent);
         }
     }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +49,7 @@ public class MainActivity extends AppCompatActivity  {
         lvlista = (ListView) findViewById(R.id.lvlista);
 
 
+
         //creo objeto respuesta
         Response.Listener<Datos> response = new Response.Listener<Datos>() {
             @Override
@@ -59,7 +58,7 @@ public class MainActivity extends AppCompatActivity  {
                 //la sintaxix siguiente muestra marcador y etiqueta
                 //geo:41.3825581,2.1704375?z=16&q=41.3825581,2.1704375(Barcelona)
 
-                String [] nombres = new String[67];
+                final String [] nombres = new String[67];
                 for(int i=0;i<67;i++){
                     nombres[i]=response.getDirectorio().get(i).getNombre().getNombreMarcador();
                 }
@@ -71,12 +70,31 @@ public class MainActivity extends AppCompatActivity  {
                     @Override
                     public void onItemClick(AdapterView<?> arg0, View arg1,
                                             int arg2, long arg3) {
+                        /*
+                        System.out.println(response.getDirectorio().get(arg2).getLocalizacion().getCoordenadas());
                         String s = "geo:"+response.getDirectorio().get(arg2).getLocalizacion().getCoordenadas()+
                                 "?z=+16&q="+response.getDirectorio().get(arg2).getLocalizacion().getCoordenadas()+
                                 "("+response.getDirectorio().get(arg2).getNombre().getNombreMarcador()+")";
+                                */
+                        String localizacion = response.getDirectorio().get(arg2).getLocalizacion().getCoordenadas();
+                        String delimitador = "[ ]+";
+                        String[] latlong = localizacion.split(delimitador);
+                        String latitud = latlong[0];
+                        String longitud = latlong[1];
+                        System.out.println(latitud);
+                        System.out.println(longitud);
+                        String descripcion = response.getDirectorio().get(arg2).getNombre().getNombreMarcador();
+                        float lat = Float.parseFloat(latitud);
+                        float lon = Float.parseFloat(longitud);
+                        //Uri myUri = Uri.parse(s);
 
-                        Uri myUri = Uri.parse(s);
-                        showMap(myUri);
+                        Intent intent = new Intent(MainActivity.this,GoogleMaps.class);
+                        intent.putExtra("latitud",lat);
+                        intent.putExtra("longitud",lon);
+                        intent.putExtra("descripcion",descripcion);
+                        startActivity(intent);
+
+
                     }
                 });
 

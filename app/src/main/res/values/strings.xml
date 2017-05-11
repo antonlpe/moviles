@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">GijonWifi</string>
     <string name="ayuda">Ayuda</string>
+    <string name="title_activity_google_maps">Map</string>
 </resources>
