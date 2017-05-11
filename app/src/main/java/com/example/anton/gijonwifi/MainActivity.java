@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -18,8 +17,6 @@ import com.android.volley.Response;
 import com.example.anton.gijonwifi.JSON.Datos;
 import com.example.anton.gijonwifi.JSON.GsonRequest;
 import com.example.anton.gijonwifi.JSON.VolleyManager;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.model.LatLng;
 
 
 public class MainActivity extends AppCompatActivity  {
@@ -70,12 +67,7 @@ public class MainActivity extends AppCompatActivity  {
                     @Override
                     public void onItemClick(AdapterView<?> arg0, View arg1,
                                             int arg2, long arg3) {
-                        /*
-                        System.out.println(response.getDirectorio().get(arg2).getLocalizacion().getCoordenadas());
-                        String s = "geo:"+response.getDirectorio().get(arg2).getLocalizacion().getCoordenadas()+
-                                "?z=+16&q="+response.getDirectorio().get(arg2).getLocalizacion().getCoordenadas()+
-                                "("+response.getDirectorio().get(arg2).getNombre().getNombreMarcador()+")";
-                                */
+
                         String localizacion = response.getDirectorio().get(arg2).getLocalizacion().getCoordenadas();
                         String delimitador = "[ ]+";
                         String[] latlong = localizacion.split(delimitador);
@@ -86,15 +78,12 @@ public class MainActivity extends AppCompatActivity  {
                         String descripcion = response.getDirectorio().get(arg2).getNombre().getNombreMarcador();
                         float lat = Float.parseFloat(latitud);
                         float lon = Float.parseFloat(longitud);
-                        //Uri myUri = Uri.parse(s);
 
                         Intent intent = new Intent(MainActivity.this,GoogleMaps.class);
                         intent.putExtra("latitud",lat);
                         intent.putExtra("longitud",lon);
                         intent.putExtra("descripcion",descripcion);
                         startActivity(intent);
-
-
                     }
                 });
 
