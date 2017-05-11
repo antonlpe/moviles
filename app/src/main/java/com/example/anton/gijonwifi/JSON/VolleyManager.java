@@ -11,7 +11,7 @@ import com.android.volley.toolbox.Volley;
 
 /**
  * Created by Antón on 07/04/2017.
- * ESTA CLASE ES MYSINGLETON RENOMBRADA
+ * ESTA CLASE ES MYSINGLETON RENOMBRADA COGIDA DIRECTAMENTE DE GOOGLE DEVELOPERS
  */
 
 public class VolleyManager {

@@ -22,18 +22,7 @@ import com.example.anton.gijonwifi.JSON.VolleyManager;
 public class MainActivity extends AppCompatActivity  {
     private static final String URL = "http://datos.gijon.es/doc/ciencia-tecnologia/zona-wifi.json";
 
-
-    Button btmapa = null;
-    TextView tx = null;
     ListView lvlista = null;
-
-    public void showMap(Uri geoLocation) {
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(geoLocation);
-        if (intent.resolveActivity(getPackageManager()) != null) {
-            startActivity(intent);
-        }
-    }
 
 
     @Override
@@ -41,10 +30,7 @@ public class MainActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        tx = (TextView) findViewById(R.id.txprueba);
-        btmapa = (Button) findViewById(R.id.btmapa);
         lvlista = (ListView) findViewById(R.id.lvlista);
-
 
 
         //creo objeto respuesta

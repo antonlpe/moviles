@@ -19,6 +19,8 @@ import java.util.Map;
 
 /**
  * Created by Antón on 07/04/2017.
+ * CLASE GSON OBTENIDA DIRECTAMENTE DE GOOGLE DEVELOPERS Y MODIFICADA PARA EL JSON
+ * QUE UTILIZA ESTA APLICACIÓN
  */
 
 public class GsonRequest<T> extends Request<T> {
@@ -26,7 +28,7 @@ public class GsonRequest<T> extends Request<T> {
     private final Class<T> clazz; //clase java en la que se parsea el json
     private final Map<String, String> headers;  //cabeceras
     private final Response.Listener<T> listener;   //peticion
-    private String key;  //key a saltarse en el json
+    private String key;  //key a saltarse en el json y acceder a "directorios" que es donde están los datos
 
     /**
      * Make a GET request and return a parsed object from JSON.
