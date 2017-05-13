@@ -1,37 +1,45 @@
-package com.example.anton.gijonwifi;
+package com.example.anton.gijonwifi.Activities;
 
 import android.content.Intent;
-import android.net.Uri;
+import com.example.anton.gijonwifi.R;
+
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.android.volley.Response;
 
-import com.example.anton.gijonwifi.JSON.Datos;
-import com.example.anton.gijonwifi.JSON.GsonRequest;
-import com.example.anton.gijonwifi.JSON.VolleyManager;
+import com.example.anton.gijonwifi.Data.Datos;
+import com.example.anton.gijonwifi.Data.GsonRequest;
+import com.example.anton.gijonwifi.Data.VolleyManager;
+import com.example.anton.gijonwifi.Fragments.Fragment_list;
 
 
 public class MainActivity extends AppCompatActivity  {
     private static final String URL = "http://datos.gijon.es/doc/ciencia-tecnologia/zona-wifi.json";
 
-    ListView lvlista = null;
-
+    TextView lvlista = null;
+    FragmentManager fragmentManager = getSupportFragmentManager();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        lvlista = (ListView) findViewById(R.id.lvlista);
+        FragmentTransaction tran = fragmentManager.beginTransaction();
+        tran.add(R.id.conten_fragmento,new Fragment_list());
+        tran.commit();
 
+        //lvlista = (ListView) findViewById(R.id.lvlista);
+        /*
 
         //creo objeto respuesta
         Response.Listener<Datos> response = new Response.Listener<Datos>() {
@@ -79,7 +87,7 @@ public class MainActivity extends AppCompatActivity  {
 
         GsonRequest<Datos> request = new GsonRequest<>(URL, Datos.class, null, response, null, "directorios");
         VolleyManager.getInstance(this).addToRequestQueue(request);
-
+        */
     }//onCreate
 
 }

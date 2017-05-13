@@ -1,4 +1,4 @@
-package com.example.anton.gijonwifi.JSON;
+package com.example.anton.gijonwifi.Data;
 
 import java.util.ArrayList;
 import java.util.List;
