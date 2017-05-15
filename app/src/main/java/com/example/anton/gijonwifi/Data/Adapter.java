@@ -2,6 +2,8 @@ package com.example.anton.gijonwifi.Data;
 
 /**
  * Created by Antón on 13/05/2017.
+ *
+ * Adapter para utilizar un RecyclerView
  */
 
 import android.content.Context;
@@ -17,14 +19,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.anton.gijonwifi.Activities.MainActivity;
-
 import java.util.List;
 
 
 
 public class Adapter extends RecyclerView.Adapter<Adapter.AdapterViewHolder> {
-    private List<RVItems> items;
+    private List<Items> items;
     private Context context;
 
     public static class AdapterViewHolder extends RecyclerView.ViewHolder {
@@ -43,7 +43,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.AdapterViewHolder> {
         }
     }
 
-    public Adapter(Context context, List<RVItems> items) {
+    public Adapter(Context context, List<Items> items) {
         this.items = items;
         this.context = context;
     }
@@ -55,27 +55,28 @@ public class Adapter extends RecyclerView.Adapter<Adapter.AdapterViewHolder> {
 
     @Override
     public AdapterViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        // aqui seleccionamos el layout que vamos a cargar con cada item, row_item_layout
+        //infla el layout y retorna un nuevo ViewHolder inicializado
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.row_item_layout, viewGroup, false);
         return new AdapterViewHolder(v);
     }
 
+    //Aquí es donde realmente reemplazamos el contenido del view
     @Override
     public void onBindViewHolder(final AdapterViewHolder viewHolder, int i) {
-        final RVItems rvItems = items.get(i);
+        final Items Items = items.get(i);
         // aqui vas rellenando los campos del layout con los datos del array
-        viewHolder.imagen.setImageResource(rvItems.getImagen());
-        viewHolder.nombre.setText(rvItems.getNombre());
-        // esto es para que al pulsar el cardview (puede ser un linearlayout o lo que quieras) respondas a la pulsacion con lo que quieras, abrir otra actividad o lo que sea
+        viewHolder.imagen.setImageResource(Items.getImagen());
+        viewHolder.nombre.setText(Items.getNombre());
+        // esto es para que al pulsar el cardview (puede ser un linearlayout o lo que se quiera)
+        // responda a la pulsacion con lo que quieras, abrir otra actividad en este caso
         viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Snackbar.make(v, rvItems.getNombre(), Snackbar.LENGTH_SHORT).show(); // esto es para probar que responde bien, puedes borrarlo
                 Intent intent = new Intent(context, GoogleMaps.class);
-                // vamos a pasarle el nombre del item a la segunda actividad
-                intent.putExtra("latitud", rvItems.getLat());
-                intent.putExtra("longitud", rvItems.getLon());
-                intent.putExtra("descripcion", rvItems.getNombre());
+                //aqui se pasan los datos del item a la segunda actividad
+                intent.putExtra("latitud", Items.getLat());
+                intent.putExtra("longitud", Items.getLon());
+                intent.putExtra("nombre", Items.getNombre());
                 context.startActivity(intent);
             }
         });

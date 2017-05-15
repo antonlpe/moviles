@@ -15,18 +15,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.example.anton.gijonwifi.Data.Adapter;
-import com.example.anton.gijonwifi.Data.RVItems;
+import com.example.anton.gijonwifi.Data.Items;
 
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-
+//Fragmento que contiene la lista de las ubicaciones wifi y que tras pulsarlo lanza la actividad GoogleMaps
 public class Fragment_list extends Fragment {
     private static final String URL = "http://datos.gijon.es/doc/ciencia-tecnologia/zona-wifi.json";
     View rootView;
     Context context;
-
+    //código de transparencias de teoría sobre uso de recyclerview
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -49,9 +48,10 @@ public class Fragment_list extends Fragment {
     }
 
     private void initRecyclerView() {
-        // creas la lista con las imagenes (aqui pongo unas a bulto) y el texto
+
         final List items = new ArrayList<>();
-        //AQUI TENGO Q PONER MIS DATOS QUE SE IMPORTAN DEL JSON
+        //dentro del response, va la implementación que necesita del acceso a los datos del JSON
+        //primero rellenamos la lista y pasamos los datos al Adapter y al RecyclerView
         Response.Listener<Datos> response = new Response.Listener<Datos>() {
 
             @Override
@@ -67,20 +67,16 @@ public class Fragment_list extends Fragment {
                         String descripcion = response.getDirectorio().get(i).getNombre().getNombreMarcador();
                         float lat = Float.parseFloat(latitud);
                         float lon = Float.parseFloat(longitud);
-                        items.add(new RVItems(R.drawable.ic_audiotrack, descripcion, lat, lon));
+                        items.add(new Items(R.drawable.wifi, descripcion, lat, lon));
                     }
-
-
-
                 }
 
-                // en los fragments tienes que usar la vista para buscar el item, en este caso rootView es la vista principal del fragment
+                //código de transparencias de teoría sobre uso de recyclerview
                 mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
-                // el sethasfixedsize es para decirle que la lista de items para el recyclerview es fija, puedes cambiarlo en caso de que no lo sea
                 mRecyclerView.setHasFixedSize(true);
-                mLayoutManager = new LinearLayoutManager(context); // si quieres que los items salgan en cuadrados como si fuese una galeria de fotos cambia el linearlayoutmanager por gridlayoutmanager
+                mLayoutManager = new LinearLayoutManager(context); // para que los items salgan en cuadrados como si fuese una galeria de fotos cambiar el linearlayoutmanager por gridlayoutmanager
                 mRecyclerView.setLayoutManager(mLayoutManager);
-                // llamamos al adapter, le pasamos el contexto y la lista de items. el context lo usaremos para lanzar la segunda actividad desde la pulsacion de un item
+                //el context para lanzar la segunda actividad desde la pulsacion de un item
                 adapter = new Adapter(context,items);
                 mRecyclerView.setAdapter(adapter);
             }//onResponse

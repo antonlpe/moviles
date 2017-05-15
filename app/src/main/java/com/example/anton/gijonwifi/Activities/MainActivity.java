@@ -33,7 +33,8 @@ public class MainActivity extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        //mostramos el fragmento con la lista en esta actividad
+        // (de momento, cuando esté el menú, ponerlo aquí y esto será otra actividad)
         FragmentTransaction tran = fragmentManager.beginTransaction();
         tran.add(R.id.conten_fragmento,new Fragment_list());
         tran.commit();
